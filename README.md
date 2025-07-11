@@ -1,70 +1,141 @@
-# Getting Started with Create React App
+# SimpleSwap UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React front-end for interacting with the SimpleSwap smart contract deployed on the Sepolia testnet. This UI lets you:
 
-## Available Scripts
+* Connect your MetaMask wallet
+* Query the current price of Token A in terms of Token B
+* Swap Token A for Token B
+* Add liquidity to the A–B pool
+* Remove liquidity from the pool
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📸 Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![SimpleSwap UI Screenshot](screenshot.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🛠 Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* **Smart Contracts:** Solidity 0.8.20, Hardhat
+* **Testing:** Mocha, Chai, solidity-coverage
+* **Ethereum Lib:** ethers.js
+* **Frontend:** React (Create React App)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔧 Prerequisites
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Node.js v16+ and npm
+2. MetaMask browser extension
+3. Sepolia testnet tokens for Token A and Token B
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ⚙️ Setup & Configuration
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. **Clone & install**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```bash
+   git clone https://github.com/GuillermoSiaira/simpleswap-ui.git
+   cd simpleswap-ui
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Environment variables**
+   Create a file named `.env` at the project root with the following contents:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ```ini
+   REACT_APP_TOKEN_A=0xc3C4B92ccD54E42e23911F5212fE628370d99e2E
+   REACT_APP_TOKEN_B=0x19546E766F5168dcDbB1A8F93733fFA23Aa79D52
+   REACT_APP_SWAP_ADDRESS=0xBfBe54b54868C37034Cfa6A8E9E5d045CC1B8278
+   ```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🚀 Running Locally
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* **Start Dev Server**
 
-### Code Splitting
+  ```bash
+  npm start
+  ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  Opens [http://localhost:3000/](http://localhost:3000/) in your browser.
 
-### Analyzing the Bundle Size
+* **Build for Production**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ```bash
+  npm run build
+  ```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📜 Available Scripts
 
-### Advanced Configuration
+* `npm start` — Launches the development server
+* `npm run build` — Bundles the app into the `build/` folder
+* `npm test` — Runs the React test suite
+* `npm run coverage` — Generates Solidity coverage report via Hardhat
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+## 🖥 Usage Guide
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Connect Wallet**
 
-### `npm run build` fails to minify
+   * Click **"Connect Wallet"** and authorize in MetaMask (Sepolia network).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+2. **Price Query**
+
+   * Click **"Show Price of A in B"** to fetch the on-chain price.
+
+3. **Swap A → B**
+
+   * Enter the amount of Token A.
+   * Specify slippage tolerance (default 1%).
+   * Click **"Swap"** to execute the transaction.
+   * Confirmation message appears on success.
+
+4. **Add Liquidity**
+
+   * Enter desired amounts of Token A and Token B.
+   * Click **"Add Liquidity"** to mint LP tokens and update reserves.
+
+5. **Remove Liquidity**
+
+   * (If implemented) enter LP amount and click **"Remove Liquidity"**.
+
+---
+
+## 📊 Coverage Report
+
+After running tests and coverage:
+
+```bash
+npx hardhat coverage
+```
+
+Open `coverage/index.html` in your browser to see:
+
+* **Statements:** 98% covered
+* **Branches:** 79% covered
+* **Functions:** 92% covered
+* **Lines:** 98% covered
+
+This report lives in the `coverage/` folder of the contract project.
+
+---
+
+## ☁️ Live Deployment
+
+Front-end is deployed on Vercel:
+
+[https://simpleswap-jonufvl4y-guillermosiairas-projects.vercel.app](https://simpleswap-jonufvl4y-guillermosiairas-projects.vercel.app)
+
+---
+
+## 📝 License
+
+This project is licensed under the MIT License. Feel free to reuse and adapt!
